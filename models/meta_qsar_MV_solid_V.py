@@ -12,7 +12,7 @@ chemical_inputs = {'solute min': 1, 'solute max': 1,
                    'solvent min': 0, 'solvent max': 0,
                    'component min': 0, 'component max': 0,
                    'total min': 1, 'total max': 1}
-solute_dependencies_list = ['MVliquid']
+solute_dependencies_list = [('MVliquid', 2)]
 solvent_dependencies_list = []
 component_dependencies_list = []
 propagated_domain_notes = ''

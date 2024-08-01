@@ -83,6 +83,11 @@ class QSARModel:
         if self.model_namespace is not None:
             return
         self.model_namespace = importlib.import_module(self.model_module)
+        # check that self.version matches the version in self.model_namespace
+        try:
+            assert self.version == self.model_namespace.version
+        except AssertionError:
+            print('Model', self.model_name, 'version mismatch:', self.version, self.model_namespace.version)
         self.model_namespace.smartslist = []
         for smarts in self.model_namespace.fragmentlist['smarts']:
             if smarts == b'intercept':
@@ -414,6 +419,11 @@ class METAQSARModel:
             return
         # initiate model namespace
         self.model_namespace = importlib.import_module(self.model_module)
+        # check that self.version matches the version in self.model_namespace
+        try:
+            assert self.version == self.model_namespace.version
+        except AssertionError:
+            print('Model', self.model_name, 'version mismatch:', self.version, self.model_namespace.version)
         # check if model is a mixture or not to help format outputs
         if self.model_namespace.chemical_inputs['total min'] <= 1:
             self.ismixture = False
@@ -422,19 +432,52 @@ class METAQSARModel:
         # link models which depend on this one
         # link solute dependencies
         self.model_namespace.solutedependencymodels = {}
-        solutedependencies = get_qsar_list(qsarlist=self.model_namespace.solute_dependencies_list)
+        solute_dependencies_list = []
+        solute_dependencies_version_list = []
+        for sd in self.model_namespace.solute_dependencies_list:
+            if type(sd) is tuple:
+                solute_dependencies_list.append(sd[0])
+                solute_dependencies_version_list.append(sd[1])
+            else:
+                solute_dependencies_list.append(sd)
+                solute_dependencies_version_list.append(None)
+        if solute_dependencies_version_list.count(None) == len(solute_dependencies_version_list):
+            solute_dependencies_version_list = None
+        solutedependencies = get_qsar_list(qsarlist=solute_dependencies_list, versionlist=solute_dependencies_version_list)
         for qsar in solutedependencies:
             self.model_namespace.solutedependencymodels[qsar.model_name] = qsar
             self.model_namespace.solutedependencymodels[qsar.model_name].super_models.append(self)
         # link solvent dependencies
         self.model_namespace.solventdependencymodels = {}
-        solventdependencies = get_qsar_list(qsarlist=self.model_namespace.solvent_dependencies_list)
+        solvent_dependencies_list = []
+        solvent_dependencies_version_list = []
+        for sd in self.model_namespace.solvent_dependencies_list:
+            if type(sd) is tuple:
+                solvent_dependencies_list.append(sd[0])
+                solvent_dependencies_version_list.append(sd[1])
+            else:
+                solvent_dependencies_list.append(sd)
+                solvent_dependencies_version_list.append(None)
+        if solvent_dependencies_version_list.count(None) == len(solvent_dependencies_version_list):
+            solvent_dependencies_version_list = None
+        solventdependencies = get_qsar_list(qsarlist=solvent_dependencies_list, versionlist=solvent_dependencies_version_list)
         for qsar in solventdependencies:
             self.model_namespace.solventdependencymodels[qsar.model_name] = qsar
             self.model_namespace.solventdependencymodels[qsar.model_name].super_models.append(self)
         # link component dependencies
         self.model_namespace.componentdependencymodels = {}
-        componentdependencies = get_qsar_list(qsarlist=self.model_namespace.component_dependencies_list)
+        component_dependencies_list = []
+        component_dependencies_version_list = []
+        for sd in self.model_namespace.component_dependencies_list:
+            if type(sd) is tuple:
+                component_dependencies_list.append(sd[0])
+                component_dependencies_version_list.append(sd[1])
+            else:
+                component_dependencies_list.append(sd)
+                component_dependencies_version_list.append(None)
+        if component_dependencies_version_list.count(None) == len(component_dependencies_version_list):
+            component_dependencies_version_list = None
+        componentdependencies = get_qsar_list(qsarlist=component_dependencies_list, versionlist=component_dependencies_version_list)
         for qsar in componentdependencies:
             self.model_namespace.componentdependencymodels[qsar.model_name] = qsar
             self.model_namespace.componentdependencymodels[qsar.model_name].super_models.append(self)
@@ -751,11 +794,17 @@ Av1 = QSARModel('ifsqsar.models.ifs_qsar_ADB_UFZ__A_linr', 'A', 1)
 Bv1 = QSARModel('ifsqsar.models.ifs_qsar_ADB_UFZ__B_linr', 'B', 1)
 Lv1 = QSARModel('ifsqsar.models.ifs_qsar_ADB_UFZ__L_linr', 'L', 1)
 Vtd = QSARModel('ifsqsar.models.other_qsar_V', 'V', 1)
+Vf = QSARModel('ifsqsar.models.other_qsar_Vf', 'Vf', 1)
 Ev2 = QSARModel('ifsqsar.models.ifs_qsar_pplfer_solutes_E_linr', 'E', 2)
 Sv2 = QSARModel('ifsqsar.models.ifs_qsar_pplfer_solutes_S_linr', 'S', 2)
 Av2 = QSARModel('ifsqsar.models.ifs_qsar_pplfer_solutes_A_linr', 'A', 2)
 Bv2 = QSARModel('ifsqsar.models.ifs_qsar_pplfer_solutes_B_linr', 'B', 2)
 Lv2 = QSARModel('ifsqsar.models.ifs_qsar_pplfer_solutes_L_linr', 'L', 2)
+Ev3 = QSARModel('ifsqsar.models.ifs_qsar_pplfer_solutes_E_v3_linr', 'E', 3)
+Sv3 = QSARModel('ifsqsar.models.ifs_qsar_pplfer_solutes_S_v3_linr', 'S', 3)
+Av3 = QSARModel('ifsqsar.models.ifs_qsar_pplfer_solutes_A_v3_linr', 'A', 3)
+Bv3 = QSARModel('ifsqsar.models.ifs_qsar_pplfer_solutes_B_v3_linr', 'B', 3)
+Lv3 = QSARModel('ifsqsar.models.ifs_qsar_pplfer_solutes_L_v3_linr', 'L', 3)
 ssp = QSARModel('ifsqsar.models.ifs_qsar_pplfer_system_2_s_linr', 's', 1)
 asp = QSARModel('ifsqsar.models.ifs_qsar_pplfer_system_2_a_linr', 'a', 1)
 bsp = QSARModel('ifsqsar.models.ifs_qsar_pplfer_system_2_b_linr', 'b', 1)
@@ -763,16 +812,25 @@ vsp = QSARModel('ifsqsar.models.ifs_qsar_pplfer_system_2_v_linr', 'v', 1)
 lsp = QSARModel('ifsqsar.models.ifs_qsar_pplfer_system_2_l_linr', 'l', 1)
 csp = QSARModel('ifsqsar.models.ifs_qsar_pplfer_system_2_c_linr', 'c', 1)
 logKow = METAQSARModel('ifsqsar.models.meta_qsar_logkow_pplfer', 'logKow', 1)
+logKowv2 = METAQSARModel('ifsqsar.models.meta_qsar_logkow_pplfer_v2', 'logKow', 2)
 logKowdry = METAQSARModel('ifsqsar.models.meta_qsar_logkowdry_pplfer', 'logKowdry', 1)
+logKowdryv2 = METAQSARModel('ifsqsar.models.meta_qsar_logkowdry_pplfer_v2', 'logKowdry', 2)
 logKoa = METAQSARModel('ifsqsar.models.meta_qsar_logkoa_pplfer', 'logKoa', 1)
+logKoav2 = METAQSARModel('ifsqsar.models.meta_qsar_logkoa_pplfer_v2', 'logKoa', 2)
 logKaw = METAQSARModel('ifsqsar.models.meta_qsar_logkaw_pplfer', 'logKaw', 1)
+logKawv2 = METAQSARModel('ifsqsar.models.meta_qsar_logkaw_pplfer_v2', 'logKaw', 2)
 logKoo = METAQSARModel('ifsqsar.models.meta_qsar_logkowod_pplfer', 'logKoo', 1)
+logKoov2 = METAQSARModel('ifsqsar.models.meta_qsar_logkowod_pplfer_v2', 'logKoo', 2)
 logVPliquid = METAQSARModel('ifsqsar.models.meta_qsar_logVP_liquid', 'logVPliquid', 1)
 logSwliquid = METAQSARModel('ifsqsar.models.meta_qsar_logSw_liquid', 'logSwliquid', 1)
 logSoliquid = METAQSARModel('ifsqsar.models.meta_qsar_logSo_liquid', 'logSoliquid', 1)
+logSoliquidv2 = METAQSARModel('ifsqsar.models.meta_qsar_logSo_liquid_v2', 'logSoliquid', 2)
 logSowetliquid = METAQSARModel('ifsqsar.models.meta_qsar_logSowet_liquid', 'logSowetliquid', 1)
+logSowetliquidv2 = METAQSARModel('ifsqsar.models.meta_qsar_logSowet_liquid_v2', 'logSowetliquid', 2)
 logVPliquidpplfer = METAQSARModel('ifsqsar.models.meta_qsar_logVP_liquid_pplfer', 'logVPliquid', 2)
+logVPliquidpplferv3 = METAQSARModel('ifsqsar.models.meta_qsar_logVP_liquid_pplfer_v3', 'logVPliquid', 3)
 logSwliquidpplfer = METAQSARModel('ifsqsar.models.meta_qsar_logSw_liquid_pplfer', 'logSwliquid', 2)
+logSwliquidpplferv3 = METAQSARModel('ifsqsar.models.meta_qsar_logSw_liquid_pplfer_v3', 'logSwliquid', 3)
 logKsa = METAQSARModel('ifsqsar.models.meta_qsar_logksa_pplfer', 'logKsa', 1)
 MVmlrx = QSARModel('ifsqsar.models.other_qsar_MV_mlrx', 'MVmlrx', 1)
 MVmlr = QSARModel('ifsqsar.models.other_qsar_MV_mlr', 'MVmlr', 1)
@@ -780,8 +838,8 @@ MVmlrRings = QSARModel('ifsqsar.models.other_qsar_MV_mlrRings', 'MVmlrRings', 1)
 MVliqcorr = QSARModel('ifsqsar.models.other_qsar_MV_liq_corr', 'MVliqcorr', 1)
 MVsolid = METAQSARModel('ifsqsar.models.meta_qsar_MV_solid', 'MVsolid', 1)
 MVliquid = METAQSARModel('ifsqsar.models.meta_qsar_MV_liquid', 'MVliquid', 1)
-MVsolidV = METAQSARModel('ifsqsar.models.meta_qsar_MV_solid_V', 'MVsolid', 1)
-MVliquidV = QSARModel('ifsqsar.models.other_qsar_MV_liquid_V', 'MVliquid', 1)
+MVsolidV = METAQSARModel('ifsqsar.models.meta_qsar_MV_solid_V', 'MVsolid', 2)
+MVliquidV = QSARModel('ifsqsar.models.other_qsar_MV_liquid_V', 'MVliquid', 2)
 densitysolid = METAQSARModel('ifsqsar.models.meta_qsar_density_solid', 'densitysolid', 1)
 densityliquid = METAQSARModel('ifsqsar.models.meta_qsar_density_liquid', 'densityliquid', 1)
 MW = QSARModel('ifsqsar.models.other_qsar_MW', 'MW', 1)
@@ -832,9 +890,9 @@ def get_qsar_list(qsarlist=None, versionlist=None):
     if qsarlist is None:
         qsarlist = ['fhlb', 'hhlb', 'hhlt', 'HLbiodeg',
                     'dsm', 'tmconsensus', 'tbpplfer',
-                    'logKow', 'logKoa', 'logKaw', 'logKoo',
+                    'logKow', 'logKowdry', 'logKoa', 'logKaw', 'logKoo',
                     'logVPliquid', 'logSwliquid', 'logSoliquid',
-                    'MVliquid', 'densityliquid', 'MW',
+                    'MVliquid', 'densityliquid', 'MVsolid', 'densitysolid', 'MW',
                     'state',
                     'E', 'S', 'A', 'B', 'V', 'L',
                     's', 'a', 'b', 'v', 'l', 'c',
@@ -843,16 +901,19 @@ def get_qsar_list(qsarlist=None, versionlist=None):
     # decide if old versions are included in parse list
     currentqsarversions = [fhlb, hhlb, hhlt, biowin3usmmlrx, biowin3usmmlra, biowin4psmmlrx, biowin4psmmlra, HLbiodeg,
                            dsm, tm, tmpplfer, tbpplfer, tmconsensus, state,
-                           Ev2, Sv2, Av2, Bv2, Lv2, Vtd, ssp, asp, bsp, vsp, lsp, csp,
-                           logKow, logKowdry, logKoa, logKaw, logKoo,
-                           logVPliquidpplfer, logSwliquidpplfer, logSoliquid, logSowetliquid,
+                           Ev3, Sv3, Av3, Bv3, Lv3, Vtd, Vf, ssp, asp, bsp, vsp, lsp, csp,
+                           logKowv2, logKawv2, logKoav2, logKowdryv2, logKoov2,
+                           logVPliquidpplferv3, logSwliquidpplferv3, logSoliquidv2, logSowetliquidv2,
                            MVsolidV, MVliquidV, densitysolid, densityliquid, MW,
                            logKsa]
     if versionlist is None:
         oldqsarversions = []
     else:
         oldqsarversions = [Ev1, Sv1, Av1, Bv1, Lv1,
+                           Ev2, Sv2, Av2, Bv2, Lv2,
+                           logKow, logKaw, logKoa, logKowdry, logKoo,
                            logVPliquid, logSwliquid,
+                           logVPliquidpplfer, logSwliquidpplfer, logSoliquid, logSowetliquid,
                            MVmlrx, MVmlr, MVmlrRings, MVliqcorr, MVsolid, MVliquid]
     # parse through all the loaded QSARs and check if they should be added to returnlist
     for i in currentqsarversions + oldqsarversions:

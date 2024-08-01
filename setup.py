@@ -11,7 +11,7 @@ with open('README.md', 'r') as f:
 
 setuptools.setup(
     name='ifsqsar',
-    version='1.1.0',
+    version='1.1.1',
     author='Trevor N. Brown',
     author_email='trevor.n.brown@gmail.com',
     description='A package for applying IFS QSARs',

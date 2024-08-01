@@ -131,7 +131,7 @@ if __name__ == "__main__":
                            help='Comma-separated list of qsars to apply.'
                                 'Single chemical QSARs:'
                                 'fhlb, hhlb, hhlt, HLbiodeg, dsm, tm, tmpplfer, tmconsensus, '
-                                'E, S, A, B, L, V, s, a, b, v, l, c, logKow, logKowdry, logKoa, '
+                                'E, S, A, B, L, V, Vf, s, a, b, v, l, c, logKow, logKowdry, logKoa, '
                                 'logKaw, logKoo, logVPliquid, logSwliquid, logSoliquid, '
                                 'MVliquid, MVsolid, densityliquid, densitysolid, '
                                 'MW, state. '
@@ -170,9 +170,9 @@ if __name__ == "__main__":
         elif args.qsars == 'default':
             qsarmodels = models.get_qsar_list(qsarlist=['fhlb', 'hhlb', 'hhlt', 'HLbiodeg',
                                                         'dsm', 'tmconsensus', 'tbpplfer',
-                                                        'logKow', 'logKoa', 'logKaw', 'logKoo',
+                                                        'logKow', 'logKowdry', 'logKoa', 'logKaw', 'logKoo',
                                                         'logVPliquid', 'logSwliquid', 'logSoliquid',
-                                                        'MVliquid', 'densityliquid', 'MW',
+                                                        'MVliquid', 'densityliquid', 'MVsolid', 'densitysolid', 'MW',
                                                         'state',
                                                         'E', 'S', 'A', 'B', 'V', 'L',
                                                         's', 'a', 'b', 'v', 'l', 'c',
@@ -180,9 +180,9 @@ if __name__ == "__main__":
         elif args.qsars == 'pure':
             qsarmodels = models.get_qsar_list(qsarlist=['fhlb', 'hhlb', 'hhlt', 'HLbiodeg',
                                                         'dsm', 'tmconsensus', 'tbpplfer',
-                                                        'logKow', 'logKoa', 'logKaw', 'logKoo',
+                                                        'logKow', 'logKowdry', 'logKoa', 'logKaw', 'logKoo',
                                                         'logVPliquid', 'logSwliquid', 'logSoliquid',
-                                                        'MVliquid', 'densityliquid', 'MW',
+                                                        'MVliquid', 'densityliquid', 'MVsolid', 'densitysolid', 'MW',
                                                         'state',
                                                         'E', 'S', 'A', 'B', 'V', 'L',
                                                         's', 'a', 'b', 'v', 'l', 'c'])

@@ -839,9 +839,9 @@ class IFSGUIClass:
         from . import models
         self.pure_qsarmodels = models.get_qsar_list(qsarlist=['fhlb', 'hhlb', 'hhlt', 'HLbiodeg',
                                                               'dsm', 'tmconsensus', 'tbpplfer',
-                                                              'logKow', 'logKoa', 'logKaw', 'logKoo',
+                                                              'logKow', 'logKowdry', 'logKoa', 'logKaw', 'logKoo',
                                                               'logVPliquid', 'logSwliquid', 'logSoliquid',
-                                                              'MVliquid', 'densityliquid', 'MW',
+                                                              'MVliquid', 'densityliquid', 'MVsolid', 'densitysolid', 'MW',
                                                               'state',
                                                               'E', 'S', 'A', 'B', 'V', 'L',
                                                               's', 'a', 'b', 'v', 'l', 'c'])

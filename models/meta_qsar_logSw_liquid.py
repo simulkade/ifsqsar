@@ -19,7 +19,7 @@ chemical_inputs = {'solute min': 1, 'solute max': 1,
                    'solvent min': 0, 'solvent max': 0,
                    'component min': 0, 'component max': 0,
                    'total min': 1, 'total max': 1}
-solute_dependencies_list = ['E', 'S', 'A', 'B', 'V', 'L', 's', 'a', 'b', 'v', 'l', 'c', 'state', 'MVliquid', 'logKaw']
+solute_dependencies_list = [('E', 2), ('S', 2), ('A', 2), ('B', 2), ('V', 1), ('L', 2), ('s', 1), ('a', 1), ('b', 1), ('v', 1), ('l', 1), ('c', 1), ('state', 1), ('MVliquid', 2), ('logKaw', 1)]
 solvent_dependencies_list = []
 component_dependencies_list = []
 propagated_domain_notes = ''

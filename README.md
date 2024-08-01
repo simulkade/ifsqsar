@@ -2,7 +2,7 @@
 **IFSQSAR - A python package for applying QSARs**  
 https://github.com/tnbrowncontam/ifsqsar  
 Created and maintained by Trevor N. Brown  
-Version 1.1.0
+Version 1.1.1
 
 IFSQSAR is free to use and redistribute, but is provided "as is" with no implied
 warranties or guarantees. The user accepts responsibility for using the software
@@ -427,6 +427,11 @@ prediction of log Kow for cyclohexane would look like this:
 > qsarlist = models.get_qsar_list(['logKow'])  
 > results = ifsqsar.apply_qsars_to_molecule(qsarlist, 'C1CCCCC1')
 
+Older versions of QSARs that have been updated are preserved, and can be called
+by also passing a list of version numbers:
+
+> qsarlist = models.get_qsar_list(['logKow'], versionlist=[1])  
+
 Using the ifsqsar package directly from python will be faster than accessing
 the same functionality from the CLI, because every time the CLI is invoked the
 models must be loaded, whereas the models only need to be loaded once when the
@@ -482,7 +487,7 @@ In this section:
 - MVsolid, densitysolid - molar volume and density of solids  
 - HLbiodeg - biodegradation half-life based on BIOWIN3/4 from EPISuite  
 - General description of Meta QSARs  
-- logKow, logKoa, logKaw - commonly used partition coefficients  
+- logKow, logKoa, logKaw - commonly used partition ratios  
 - logKoo - hypothetical partition ratio between wet and dry octanol  
 - tmpplfer, tbpplfer - melting and boiling point from PPLFER equations  
 - tmconsensus - melting point, consensus of the other two QSARs  
@@ -541,7 +546,7 @@ datasets contain 552 and 553 chemicals, respectively. The validation statistics
 are r-sq[external] = 0.72 and RMSE of predictions = 0.70, with the data spanning
 about 7.5 log units. Full details are available in reference [8].
 
-**E, S, A, B, V, L - QSPRs for Abraham PPLFER solute descriptors**
+**E, S, A, B, V, Vf, L - QSPRs for Abraham PPLFER solute descriptors**
 A separate IFS QSPR has been developed for each descriptor, excluding V which is
 calculated using a simple QSPR from the literature [12]. Preliminary versions of
 the QSPRs have been made available on the UFZ LSER database [9], and are
@@ -555,9 +560,10 @@ greater than or equal to zero, because values less than zero are not meaningful.
 The validation statistics are good, with r-sq[external] > 0.80 in all cases. The
 RMSE for the external validation dataset is less than 0.30 for E, S, A, and B;
 and is 0.38 for L which has a greater range of values than the other
-descriptors. Full details are available in reference [13]. These QSPRs are
-version 2. Version 1 of the QSPRs is the versions available on the UZF LSER
-database [9], which can also be accessed in IFSQSAR.
+descriptors. Full details are available in reference [13]. Version 3 of the
+solute descriptor PPLFERs are updated with new data for PFAS [19]. Vf is an
+alteration to V suggested by Goss [20], and is used in partitioning QSPRs which
+have been updated with data for PFAS.
 
 **s, a, b, v, l, c - QSPRs for Abraham/Goss PPLFER system parameters**
 The QSPRs are specifically for the system parameters of PPLFER equations for
@@ -657,7 +663,8 @@ includes a "dry" version where the two phases are assumed to be pure, with no
 mutual solubility as would be found if they were in direct contact during
 experimental determination. The system parameters for logKoa and logKaw are
 taken from reference [14] and the rest are calibrated in reference [16]. The
-estimation of prediction uncertainty was also improved in [16].
+estimation of prediction uncertainty was also improved in [16], and prediction
+accuracy was improved for PFAS in [19].
 
 **logKoo - hypothetical partition ratio between wet and dry octanol**
 
@@ -666,6 +673,7 @@ octanol saturated with water (wet octanol) and pure octanol (dry octanol).
 Calculated by thermodynamic cycle from logKow and logKowdry. Required to ensure
 thermodynamic consistency between logKow, logKoa, and logKaw, because logKow is
 typically wet, and logKoa is typically dry. Calibrated in reference [16].
+Prediction accuracy was improved for PFAS in [19].
 
 **tmpplfer, tbpplfer - melting and boiling point from PPLFER equations**
 
@@ -676,6 +684,7 @@ validation dataset. UL is instead set using the leverage vs. training datasets
 of solute descriptors and cut-off values which are calculated the same way as
 is described in section 6. Prediction uncertainties were calculated for each UL
 with the standard error of prediction for the external validation datasets.
+PPLFER equations have not been recalibrated for new PFAS solute descriptors.
 
 **tmconsensus - melting point, consensus of the other two QSARs**
 
@@ -725,7 +734,8 @@ liquid values for the calibration. Soliquid is calculated by thermodynamic cycle
 from VP and logKoa. The output is the base-10 logarithm of VP, Sw, or So of the
 liquid or super-cooled liquid. VP, Sw, and So may be capped at a maximum value
 (upper boundary condition) to prevent unreasonably large predicted values. More
-details can be found in reference [16]
+details can be found in reference [16]. Prediction accuracy was improved for
+PFAS in [19].
 
 ********************************************************************************
 **6. INTERPRETING QSAR APPLICABILITY DOMAIN INFORMATION**
@@ -928,6 +938,15 @@ Version 1.1.0
 - smarts_norm now returns IFSMol, a subclass of OBMol
 - Various bug fixes
 
+Version 1.1.1
+- Major partitioning properties updated with new data for PFAS:
+    - logKow, logKowdry, logKaw, logKoa, logKoo, logSw, logSo[w/d], logVP
+- Solute descriptors updated with new data for PFAS:
+    - E, S, B, L : only regression coefficients updated
+    - A : completely recalibrated from scratch
+- New chemical property added:
+    - Vf : Mcgowan volume with increment for F altered as suggested by Goss
+
 ********************************************************************************
 **9. KNOWN BUGS AND PLANNED FEATURES**
 ********************************************************************************
@@ -995,7 +1014,7 @@ Version 1.1.0
 
 13. Brown, T.N., QSPRs for Predicting Equilibrium Partitioning in Solvent–Air
     Systems from the Chemical Structures of Solutes and Solvents. Journal of
-    Solution Chemistry, 2022. DOI: 10.1007/s10953-022-01162-2
+    Solution Chemistry, 2022, 51, 1101. DOI: 10.1007/s10953-022-01162-2
 
 14. Brown, T. N., Empirical Regressions between System Parameters and Solute
     Descriptors of Polyparameter Linear Free Energy Relationships (PPLFERs) for
@@ -1007,15 +1026,24 @@ Version 1.1.0
     957-966. DOI: 10.1134/S1070427206060176
 
 16. Brown T.N., Sangion A., Arnot J.A.; Identifying Uncertainty in Physical-
-    Chemical Property Estimation with IFSQSAR. 2024, In Prep.
+    Chemical Property Estimation with IFSQSAR. 2024, J Cheminform 2024, 16, 65.
+    DOI: 10.1186/s13321-024-00853-w
 
-17. Boethling, R. S.;  Howard, P. H.;  Meylan, W.;  Stiteler, W.;  Beauman, J.;
-    Tirado, N., Group contribution method for predicting probability and rate of
-    aerobic biodegradation. Environmental science & technology 1994, 28 (3),
+17. Boethling R. S.,  Howard P. H.,  Meylan W.,  Stiteler W.,  Beauman J.,
+    Tirado N., Group contribution method for predicting probability and rate of
+    aerobic biodegradation. Environ. Sci. Technol. 1994, 28 (3),
     459-65. DOI: 10.1021/es00052a018
 
-18. Arnot, J. A.;  Gouin, T.; Mackay, D. Development and Application of Models
+18. Arnot J. A.;  Gouin, T.; Mackay, D. Development and Application of Models
     of Chemical Fate in Canada - Practical methods for estimating environmental
     biodegradation rates; 2005.
+
+19. Brown T.N., Sangion A., Arnot J.A.; Incremental improvements in predicting 
+    physicochemical properties for polyfluorinated or per-fluorinated alkyl
+    substances (PFAS). Submitted.
+
+20. Goss K.-U., Bronner G., Harner T., Hertel  M., Schmidt T.C., The Partition
+    Behavior of Fluorotelomer Alcohols and Olefins. Environ. Sci. Technol. 2006,
+    40, 11. DOI: 10.1021/es060744y
 
 ********************************************************************************
