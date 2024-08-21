@@ -174,7 +174,7 @@ if __name__ == "__main__":
                                                         'logVPliquid', 'logSwliquid', 'logSoliquid',
                                                         'MVliquid', 'densityliquid', 'MVsolid', 'densitysolid', 'MW',
                                                         'state',
-                                                        'E', 'S', 'A', 'B', 'V', 'L',
+                                                        'E', 'S', 'A', 'B', 'V', 'Vf', 'L',
                                                         's', 'a', 'b', 'v', 'l', 'c',
                                                         'logKsa'])
         elif args.qsars == 'pure':
@@ -184,7 +184,7 @@ if __name__ == "__main__":
                                                         'logVPliquid', 'logSwliquid', 'logSoliquid',
                                                         'MVliquid', 'densityliquid', 'MVsolid', 'densitysolid', 'MW',
                                                         'state',
-                                                        'E', 'S', 'A', 'B', 'V', 'L',
+                                                        'E', 'S', 'A', 'B', 'V', 'Vf', 'L',
                                                         's', 'a', 'b', 'v', 'l', 'c'])
         elif args.qsars == 'mixture':
             qsarmodels = models.get_qsar_list(qsarlist=['logKsa'])

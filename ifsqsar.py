@@ -843,7 +843,7 @@ class IFSGUIClass:
                                                               'logVPliquid', 'logSwliquid', 'logSoliquid',
                                                               'MVliquid', 'densityliquid', 'MVsolid', 'densitysolid', 'MW',
                                                               'state',
-                                                              'E', 'S', 'A', 'B', 'V', 'L',
+                                                              'E', 'S', 'A', 'B', 'V', 'Vf', 'L',
                                                               's', 'a', 'b', 'v', 'l', 'c'])
         self.mixture_qsarmodels = models.get_qsar_list(qsarlist=['logKsa'])
         # setup openbabel converter

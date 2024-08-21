@@ -894,7 +894,7 @@ def get_qsar_list(qsarlist=None, versionlist=None):
                     'logVPliquid', 'logSwliquid', 'logSoliquid',
                     'MVliquid', 'densityliquid', 'MVsolid', 'densitysolid', 'MW',
                     'state',
-                    'E', 'S', 'A', 'B', 'V', 'L',
+                    'E', 'S', 'A', 'B', 'V', 'Vf', 'L',
                     's', 'a', 'b', 'v', 'l', 'c',
                     'logKsa']
     returnlist = []
