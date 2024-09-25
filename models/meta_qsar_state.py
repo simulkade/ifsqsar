@@ -7,15 +7,15 @@ citation = 'tm and tb from PPLFERs: '\
            'Brown, T. N.; '\
            'QSPRs for Predicting Equilibrium Partitioning in Solvent-Air Systems '\
            'from the Chemical Structures of Solutes and Solvents. '\
-           'J Solution Chem 2022, (https://doi.org/10.1007/s10953-022-01162-2).'\
+           'J Solution Chem 2022, 51, 1101 (https://doi.org/10.1007/s10953-022-01162-2). '\
            'tm from QSPR: '\
            'Brown, T. N.;  Armitage, J. M.; Arnot, J. A., '\
            'Application of an Iterative Fragment Selection (IFS) Method to Estimate Entropies of Fusion and Melting'\
-           'Points of Organic Chemicals. Mol Inform 2019, 38 (8-9), 1800160.'\
+           'Points of Organic Chemicals. Mol Inform 2019, 38 (8-9), 1800160 (https://doi.org/10.1002/minf.201800160). '\
            'Decision tree defined in: '\
            'Brown T.N., Sangion A., Arnot J.A.; '\
-           'Identifying Uncertainty in Physical-Chemical Property Estimation with IFSQSAR.'\
-           '2024, In Prep.'
+           'Identifying Uncertainty in Physical-Chemical Property Estimation with IFSQSAR. '\
+           'J Cheminform, 2024. 16(1): p65 (https://doi.org/10.1186/s13321-024-00853-w).'
 round_digits = np.nan
 units = ''
 chemical_inputs = {'solute min': 1, 'solute max': 1,

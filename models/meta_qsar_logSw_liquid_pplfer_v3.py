@@ -3,9 +3,9 @@ import numpy as np
 value_names = ('logSwliquid',)
 version = 3
 endpoint = 'Log of solubility for liquids or super-cooled liquid solutes in water predicted by PPLFER at 298K - updated for PFAS'
-citation = 'Brown, T. N.; Armitage, J. M.; Sangion, A.; Arnot, J. A.;'\
-           'Incremental improvements in predicting physical-chemical properties for PFAS.'\
-           'In. prep.'
+citation = 'Brown, T. N.; Armitage, J. M.; Sangion, A.; Arnot, J. A.; '\
+           'Improved prediction of PFAS partitioning with PPLFERs and QSPRs. '\
+           'Environ. Sci.: Process. Impacts, 2024, Accepted.'
 round_digits = 2
 units = 'log mol/L[w]'
 chemical_inputs = {'solute min': 1, 'solute max': 1,

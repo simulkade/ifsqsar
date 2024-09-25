@@ -5,7 +5,7 @@ version = 1
 endpoint = 'Whole body biotransformation half-life in reference fish (0.01kg, 15degC)'
 citation = 'Brown, T. N.;  Arnot, J. A.; Wania, F., '\
            'Iterative fragment selection: a group contribution approach to predicting fish biotransformation '\
-           'half-lives. Environ Sci Technol 2012, 46 (15), 8253-60.'
+           'half-lives. Environ Sci Technol 2012, 46 (15), 8253-60 (https://doi.org/10.1021/es301182a).'
 round_digits = 2
 units = 'hours'
 chemical_inputs = {'solute min': 1, 'solute max': 1,

@@ -1002,7 +1002,8 @@ Version 1.1.1
 
 10. Brown T.N., Armitage J.M., Arnot J.A.; Application of an iterative fragment
     selection (IFS) method to estimate entropies of fusion and melting points of
-    organic chemicals. Molecular Informatics, 2019. DOI: 10.1002/minf.201800160  
+    organic chemicals. Molecular Informatics, 2019, 38 (8-9), 1800160.
+    DOI: 10.1002/minf.201800160  
     
 11. O’Boyle, N. M., Towards a Universal SMILES representation - A standard
     method to generate canonical SMILES based on the InChI. Journal of
@@ -1038,9 +1039,9 @@ Version 1.1.1
     of Chemical Fate in Canada - Practical methods for estimating environmental
     biodegradation rates; 2005.
 
-19. Brown T.N., Sangion A., Arnot J.A.; Incremental improvements in predicting 
-    physicochemical properties for polyfluorinated or per-fluorinated alkyl
-    substances (PFAS). Submitted.
+19. Brown, T. N.; Armitage, J. M.; Sangion, A.; Arnot, J. A.; Improved
+    prediction of PFAS partitioning with PPLFERs and QSPRs. Environ. Sci.:
+    Process. Impacts, 2024, Accepted.
 
 20. Goss K.-U., Bronner G., Harner T., Hertel  M., Schmidt T.C., The Partition
     Behavior of Fluorotelomer Alcohols and Olefins. Environ. Sci. Technol. 2006,

@@ -859,7 +859,7 @@ def get_qsar_list(qsarlist=None, versionlist=None):
             "tm" -- melting point (QSPR)
             "tmpplfer" -- melting point (PPLFER)
             "tmconsensus" -- melting point (mean of QSPR+PPLFER)
-            "E","S","A","B","L","V" -- Abraham PPLFER solute descriptors
+            "E","S","A","B","L","V","Vf" -- Abraham/Goss PPLFER solute descriptors
             "s","a","b","v","l","c" -- Abraham/Goss PPLFER system parameters
             "logKow","logKowdry","logKoa","logKaw" -- partition coeff. of octanol, water, and air
             "logKoo" -- octanol wet-dry conversion factor

@@ -4,8 +4,8 @@ value_names = ('hhlt',)
 version = 1
 endpoint = 'Whole body total elimination (terminal) half-life in reference human (70kg)'
 citation = 'Arnot, J. A.;  Brown, T. N.; Wania, F., '\
-           'Estimating screening-level organic chemical half-lives in humans.'\
-           'Environ Sci Technol 2014, 48 (1), 723-30.'
+           'Estimating screening-level organic chemical half-lives in humans. '\
+           'Environ Sci Technol 2014, 48 (1), 723-30 (https://doi.org/10.1021/es4029414).'
 round_digits = 2
 units = 'hours'
 chemical_inputs = {'solute min': 1, 'solute max': 1,

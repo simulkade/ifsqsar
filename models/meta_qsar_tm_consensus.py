@@ -5,13 +5,13 @@ version = 1
 endpoint = 'Melting point - mean of QSPR and PPLFER predictions'
 citation = 'tm from PPLFER: '\
            'Brown, T. N.; '\
-           'Development of Iterative Fragment Selection (IFS) QSPRs for Poly-Parameter Linear Free Energy '\
-           'Relationship (PPLFER) Solute Descriptors and System Parameters. '\
-           'J Solution Chem 2021, In Review. '\
+           'QSPRs for Predicting Equilibrium Partitioning in Solvent-Air Systems '\
+           'from the Chemical Structures of Solutes and Solvents. '\
+           'J Solution Chem 2022, 51, 1101 (https://doi.org/10.1007/s10953-022-01162-2). '\
            'tm from QSPR: '\
            'Brown, T. N.;  Armitage, J. M.; Arnot, J. A., '\
-           'Application of an Iterative Fragment Selection (IFS) Method to Estimate Entropies of Fusion and Melting'\
-           'Points of Organic Chemicals. Mol Inform 2019, 38 (8-9), 1800160.'
+           'Application of an Iterative Fragment Selection (IFS) Method to Estimate Entropies of Fusion and Melting '\
+           'Points of Organic Chemicals. Mol Inform 2019, 38 (8-9), 1800160 (https://doi.org/10.1002/minf.201800160).'
 round_digits = 2
 units = 'K'
 chemical_inputs = {'solute min': 1, 'solute max': 1,

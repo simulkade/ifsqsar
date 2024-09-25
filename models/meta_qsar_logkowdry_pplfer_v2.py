@@ -3,9 +3,9 @@ import numpy as np
 value_names = ('logKowdry',)
 version = 2
 endpoint = 'Log of dry (hypothetical) octanol-water partition coefficient (log P) - updated for PFAS'
-citation = 'Brown, T. N.; Armitage, J. M.; Sangion, A.; Arnot, J. A.;'\
-           'Incremental improvements in predicting physical-chemical properties for PFAS.'\
-           'In. prep.'
+citation = 'Brown, T. N.; Armitage, J. M.; Sangion, A.; Arnot, J. A.; '\
+           'Improved prediction of PFAS partitioning with PPLFERs and QSPRs. '\
+           'Environ. Sci.: Process. Impacts, 2024, Accepted.'
 round_digits = 2
 units = 'log L[w]/L[dry o]'
 chemical_inputs = {'solute min': 1, 'solute max': 1,

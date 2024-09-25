@@ -3,9 +3,9 @@ import numpy
 value_names = ('A',)
 version = 3
 endpoint = 'Abraham PPLFER solute descriptor A - hydrogen bond acidity - updated for PFAS'
-citation = 'Brown, T. N.; Armitage, J. M.; Sangion, A.; Arnot, J. A.;'\
-           'Incremental improvements in predicting physical-chemical properties for PFAS.'\
-           'In. prep.'
+citation = 'Brown, T. N.; Armitage, J. M.; Sangion, A.; Arnot, J. A.; '\
+           'Improved prediction of PFAS partitioning with PPLFERs and QSPRs. '\
+           'Environ. Sci.: Process. Impacts, 2024, Accepted.'
 round_digits = 3
 units = ''
 chemical_inputs = {'solute min': 1, 'solute max': 1,

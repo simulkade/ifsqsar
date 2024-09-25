@@ -5,7 +5,7 @@ version = 1
 endpoint = 'Entropy of fusion'
 citation = 'Brown, T. N.;  Armitage, J. M.; Arnot, J. A., '\
            'Application of an Iterative Fragment Selection (IFS) Method to Estimate Entropies of Fusion and Melting '\
-           'Points of Organic Chemicals. Mol Inform 2019, 38 (8-9), 1800160.'
+           'Points of Organic Chemicals. Mol Inform 2019, 38 (8-9), 1800160 (https://doi.org/10.1002/minf.201800160).'
 round_digits = 2
 units = 'J/mol.K'
 chemical_inputs = {'solute min': 1, 'solute max': 1,

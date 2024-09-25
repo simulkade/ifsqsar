@@ -6,7 +6,7 @@ endpoint = 'Abraham PPLFER solute descriptor A - hydrogen bond acidity'
 citation = 'Brown, T. N.; '\
            'QSPRs for Predicting Equilibrium Partitioning in Solvent-Air Systems '\
            'from the Chemical Structures of Solutes and Solvents. '\
-           'J Solution Chem 2022, (https://doi.org/10.1007/s10953-022-01162-2).'
+           'J Solution Chem 2022, 51, 1101 (https://doi.org/10.1007/s10953-022-01162-2).'
 
 round_digits = 3
 units = 'unitless'

@@ -7,7 +7,7 @@ citation = 'Solute descriptors: '\
            'Brown, T. N.; '\
            'QSPRs for Predicting Equilibrium Partitioning in Solvent-Air Systems '\
            'from the Chemical Structures of Solutes and Solvents. '\
-           'J Solution Chem 2022, (https://doi.org/10.1007/s10953-022-01162-2).'\
+           'J Solution Chem 2022, 51, 1101 (https://doi.org/10.1007/s10953-022-01162-2). '\
            'PPLFER Equation: '\
            'Brown, T. N., '\
            'Empirical Regressions between System Parameters and Solute Descriptors of Polyparameter Linear Free '\

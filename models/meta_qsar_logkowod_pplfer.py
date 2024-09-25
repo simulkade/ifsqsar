@@ -10,8 +10,8 @@ citation = 'Solute descriptors: '\
            'J Solution Chem 2022, (https://doi.org/10.1007/s10953-022-01162-2).'\
            'PPLFER Equation: '\
            'Brown T.N., Sangion A., Arnot J.A.; '\
-           'Identifying Uncertainty in Physical-Chemical Property Estimation with IFSQSAR.'\
-           '2024, In Prep.'
+           'Identifying Uncertainty in Physical-Chemical Property Estimation with IFSQSAR. '\
+           'J Cheminform, 2024. 16(1): p65 (https://doi.org/10.1186/s13321-024-00853-w).'
 round_digits = 2
 units = 'log L[dry o]/L[wet o]'
 chemical_inputs = {'solute min': 1, 'solute max': 1,
