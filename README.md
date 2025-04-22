@@ -389,9 +389,9 @@ In this section:
 **General overview of python usage**
 
 Python users should import the ifsqsar package with the syntax:
-
-> from ifsqsar import ifsqsar
-
+```python
+from ifsqsar import ifsqsar
+```
 The main python interface is the ifsqsar.apply_qsars_to_molecule_list function.
 The CLI is built on top of this function and provides access to most of its
 functionality. Options are available to specify the format of input files, the
@@ -410,9 +410,9 @@ of its attributes.
 
 The QSARs are stored in the models subpackage, which can be imported using the
 syntax:
-
-> from ifsqsar import models
-
+```python
+from ifsqsar import models
+```
 A list of QSAR objects must be passed to ifsqsar.apply_qsars_to_molecule_list
 as the first positional argument. The get_qsar_list function in the models
 subpackage creates a list of QSARs from a list of strings of QSAR names. Calling
@@ -421,17 +421,17 @@ excluding older version of the QSARs and models only used internally. Older
 versions of the QSARs can be accessed by specifying the version number in the
 optional version argument. As an example, the overall python code to make a
 prediction of log Kow for cyclohexane would look like this:
-
-> from ifsqsar import ifsqsar  
-> from ifsqsar import models  
-> qsarlist = models.get_qsar_list(['logKow'])  
-> results = ifsqsar.apply_qsars_to_molecule(qsarlist, 'C1CCCCC1')
-
+```python
+from ifsqsar import ifsqsar  
+from ifsqsar import models  
+qsarlist = models.get_qsar_list(['logKow'])  
+results = ifsqsar.apply_qsars_to_molecule(qsarlist, 'C1CCCCC1')
+```
 Older versions of QSARs that have been updated are preserved, and can be called
 by also passing a list of version numbers:
-
-> qsarlist = models.get_qsar_list(['logKow'], versionlist=[1])  
-
+```python
+qsarlist = models.get_qsar_list(['logKow'], versionlist=[1])  
+```
 Using the ifsqsar package directly from python will be faster than accessing
 the same functionality from the CLI, because every time the CLI is invoked the
 models must be loaded, whereas the models only need to be loaded once when the
