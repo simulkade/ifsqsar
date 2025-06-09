@@ -604,16 +604,16 @@ def apply_qsars_to_molecule_list(qsarlist,
     for qsar in qsarlist:
         # initialize dict of calculated results
         result['QSAR list'].append(qsar.model_name)
-        result[qsar.model_name] = {}
+        result[qsar.model_name] = {} # type: ignore
         for val in values:
             if val in ('endpoint', 'units', 'ULnote', 'citation'):
-                result[qsar.model_name][val] = []
+                result[qsar.model_name][val] = [] # type: ignore
     # parse through structures
     orderedcolumnlist = []
-    for smiles in range(len(smileslist)):
+    for smiles in range(len(smileslist)): # type: ignore
         # apply qsars to this structure
         singleresult = apply_qsars_to_molecule(qsarlist,
-                                               smileslist[smiles],
+                                               smileslist[smiles], # type: ignore
                                                converter=converter,
                                                values=values,
                                                outformat='dict',
@@ -634,54 +634,54 @@ def apply_qsars_to_molecule_list(qsarlist,
                     elif val == 'citation' and (qsar, val) in orderedcolumnlist:
                         orderedcolumnlist.remove((qsar, val))
                         orderedcolumnlist.append((qsar, val))
-                    result[qsar][val].append(singleresult[qsar][val])
+                    result[qsar][val].append(singleresult[qsar][val]) # type: ignore
                 if val in ('qsarpred', 'UL', 'error'):
                     if val in singleresult[qsar]:
                         if val not in result[qsar]:
                             orderedcolumnlist.append((qsar, val))
-                            result[qsar][val] = []
+                            result[qsar][val] = [] # type: ignore
                             for i in range(smiles):
-                                result[qsar][val].append(np.nan)
-                        result[qsar][val].append(singleresult[qsar][val])
+                                result[qsar][val].append(np.nan) # type: ignore
+                        result[qsar][val].append(singleresult[qsar][val]) # type: ignore
                     for s in range(1, 201):
                         localval = ' '.join([val, 'solute', str(s)])
                         if localval not in singleresult[qsar]:
                             break
                         if localval not in result[qsar]:
                             orderedcolumnlist.append((qsar, localval))
-                            result[qsar][localval] = []
+                            result[qsar][localval] = [] # type: ignore
                             for i in range(smiles):
-                                result[qsar][localval].append(np.nan)
-                        result[qsar][localval].append(singleresult[qsar][localval])
+                                result[qsar][localval].append(np.nan) # type: ignore
+                        result[qsar][localval].append(singleresult[qsar][localval]) # type: ignore
                     for c in range(1, 201):
                         localval = ' '.join([val, 'component', str(c)])
                         if localval not in singleresult[qsar]:
                             break
                         if localval not in result[qsar]:
                             orderedcolumnlist.append((qsar, localval))
-                            result[qsar][localval] = []
+                            result[qsar][localval] = [] # type: ignore
                             for i in range(smiles):
-                                result[qsar][localval].append(np.nan)
-                        result[qsar][localval].append(singleresult[qsar][localval])
+                                result[qsar][localval].append(np.nan) # type: ignore
+                        result[qsar][localval].append(singleresult[qsar][localval]) # type: ignore
         # top up any result lists that aren't full
         for qsar in result['QSAR list']:
             for val in ('qsarpred', 'UL', 'error'):
                 if val in values:
                     if val in result[qsar]:
-                        for i in range(1+smiles-len(result[qsar][val])):
-                            result[qsar][val].append(np.nan)
+                        for i in range(1+smiles-len(result[qsar][val])): # type: ignore
+                            result[qsar][val].append(np.nan) # type: ignore
                     for s in range(1, 201):
                         localval = ' '.join([val, 'solute', str(s)])
                         if localval not in result[qsar]:
                             break
-                        for i in range(1+smiles-len(result[qsar][localval])):
-                            result[qsar][localval].append(np.nan)
+                        for i in range(1+smiles-len(result[qsar][localval])): # type: ignore
+                            result[qsar][localval].append(np.nan) # type: ignore
                     for c in range(1, 201):
                         localval = ' '.join([val, 'component', str(c)])
                         if localval not in result[qsar]:
                             break
-                        for i in range(1+smiles-len(result[qsar][localval])):
-                            result[qsar][localval].append(np.nan)
+                        for i in range(1+smiles-len(result[qsar][localval])): # type: ignore
+                            result[qsar][localval].append(np.nan) # type: ignore
     # return results dict if outformat is dict
     outline = ''
     if outformat == 'dict':
@@ -729,7 +729,7 @@ def apply_qsars_to_molecule_list(qsarlist,
                     else:
                         outline = outseparator.join([outline, ' '.join([column[0], column[1]])])
             outline = ''.join([outline, outendline])
-        for chem in range(len(smileslist)):
+        for chem in range(len(smileslist)): # type: ignore
             first = True
             for column in orderedcolumnlist:
                 if column == 'OBMol':
@@ -1075,7 +1075,7 @@ class IFSGUIClass:
             localqsarlist = self.pure_qsarmodels
         elif self.mixturemode.get() == 'mixture':
             localqsarlist = self.mixture_qsarmodels
-        results = apply_qsars_to_molecule(localqsarlist, smiles=smiles, converter=self.obcon, outformat='columns')
+        results = apply_qsars_to_molecule(localqsarlist, smiles=smiles, converter=self.obcon, outformat='columns') # type: ignore
         # display results
         self.textresult.delete('1.0', self.tk.END)
         self.textresult.insert('1.0', results)
@@ -1114,7 +1114,7 @@ class IFSGUIClass:
             localqsarlist = self.pure_qsarmodels
         elif self.mixturemode.get() == 'mixture':
             localqsarlist = self.mixture_qsarmodels
-        apply_qsars_to_molecule_list(localqsarlist,
+        apply_qsars_to_molecule_list(localqsarlist, # type: ignore
                                      infilename=self.inputfilename,
                                      inheaderrows=1,
                                      inheadtrgtrow=1,

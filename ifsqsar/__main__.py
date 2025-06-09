@@ -6,7 +6,7 @@ Implements a command line interface (CLI) that accesses the functionality of the
 
 if __name__ == "__main__":
     from . import ifsqsar
-    from . import models
+    from .. import models
     import argparse
     import os
 

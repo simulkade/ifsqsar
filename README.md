@@ -12,6 +12,22 @@ IFSQSAR was coded using only open source python modules, and the QSARs have all
 been published in peer-reviewed literature. See below for details on open source
 licensing.
 
+**Installation**  
+This package requires `openbabel`, which is best installed via Conda. To set up the environment:
+
+```bash
+conda create -n ifsqsar-env python=3.8 openbabel numpy
+conda activate ifsqsar-env
+pip install ifsqsar
+```
+
+Alternatively, one can 
+
+```bash
+conda env create -f environment.yml
+conda activate ifsqsar-env
+```
+
 **Funding and Acknowledgements**  
 Prof. Dr. Frank Wania, Prof. Dr. Kai-Uwe Goss, and Dr. Jon A. Arnot are
 acknowledged as coauthors on publications and for supporting this work as 
