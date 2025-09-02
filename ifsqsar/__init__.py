@@ -5,3 +5,4 @@ to access API import like this:
 from ifsqsar import ifsqsar
 from ifsqsar import models
 """
+__version__ = "1.1.1"
