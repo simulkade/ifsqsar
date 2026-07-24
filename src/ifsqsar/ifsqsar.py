@@ -10,6 +10,16 @@ import numpy as np
 from . import smiles_norm
 import re
 
+# tkinter is only needed for the optional GUI (IFSGUIClass / main()).
+# Import it lazily so the QSAR API (apply_qsars_to_molecule, ...) can be used
+# in environments without tkinter (e.g. headless servers, minimal installs).
+try:
+    import tkinter as _tkinter
+    _TKINTER_TEXT_BASE = _tkinter.Text
+except ImportError:
+    _tkinter = None
+    _TKINTER_TEXT_BASE = object
+
 chargedatom = re.compile('[\[].+?[-+][\]]')
 mixturespec = re.compile('(\{.*?\})')
 
@@ -794,9 +804,9 @@ def apply_qsars_to_molecule_list(qsarlist,
 class IFSGUIClass:
     """A GUI interface for reading in structures as SMILES and applying QSARs to the structures."""
 
-    tk = __import__('tkinter')
+    tk = _tkinter
 
-    class _ReadOnlyText(tk.Text):
+    class _ReadOnlyText(_TKINTER_TEXT_BASE):
         """Subclass of tk.Text that is read-only."""
 
         def __init__(self, *args, **kwargs):
@@ -1165,5 +1175,8 @@ class IFSGUIClass:
 
 def main():
     """Main loop for tk GUI"""
+    if _tkinter is None:
+        raise ImportError("The IFSQSAR GUI requires tkinter, which is not installed. "
+                          "Install tkinter to use the GUI; the QSAR API works without it.")
     app_manager = IFSGUIClass()
 
